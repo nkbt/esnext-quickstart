@@ -2,8 +2,8 @@
 
 
 require('babel-core/polyfill');
-require('./static/reset.css');
-require('./static/base.css');
+require('./utils/reset.css');
+require('./utils/base.css');
 
 
 const React = require('react');
