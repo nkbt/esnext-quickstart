@@ -1,0 +1,32 @@
+{
+  "name": "esnext-quickstart",
+  "version": "1.0.0",
+  "description": "ESNext quickstart",
+  "engines": {
+    "iojs": "1.8.1"
+  },
+  "scripts": {
+    "start": "node --es_staging --harmony_arrow_functions server.js",
+    "build": "rm -rf public && cp -pr src/static/ public && webpack",
+    "lint": "npm run lint:node && npm run lint:browser",
+    "lint:node": "eslint --config=./.eslintrc *.js scripts/*.js",
+    "lint:browser": "eslint --config=./src/.eslintrc src/**/**/*.js"
+  },
+  "dependencies": {
+    "babel-core": "^4.7.16",
+    "babel-loader": "^4.2.0",
+    "css-loader": "^0.9.1",
+    "eslint": "^0.18.0",
+    "eslint-loader": "^0.9.0",
+    "eslint-plugin-react": "^2.0.2",
+    "file-loader": "^0.8.1",
+    "lodash": "^3.6.0",
+    "react": "^0.13.1",
+    "react-hot-loader": "^1.2.4",
+    "sorted-object": "^1.0.0",
+    "style-loader": "^0.9.0",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.7.3",
+    "webpack-dev-server": "^1.7.0"
+  }
+}
