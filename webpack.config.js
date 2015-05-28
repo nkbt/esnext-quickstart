@@ -3,7 +3,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const _ = require('lodash');
+const assign = require('lodash/object/assign');
 const embedFileSize = 65536;
 
 const config = {
@@ -54,34 +54,68 @@ const config = {
   }
 };
 
-const production = _.extend({}, config, {
+const production = assign({}, config, {
   plugins: config.plugins.concat(new webpack.NoErrorsPlugin()),
-  module: _.extend({}, config.module, {
+  module: assign({}, config.module, {
     loaders: config.module.loaders.concat({
       test: /\.js$/,
       loaders: ['babel'],
-      include: [new RegExp(path.join(__dirname, 'src'))]
+      include: [path.join(__dirname, 'src')]
     })
   }),
-  eslint: _.extend({}, config.eslint, {emitError: true})
+  eslint: assign({}, config.eslint, {emitError: true})
 });
 
-const development = _.extend({}, config, {
+const development = assign({}, config, {
   entry: config.entry.concat([
-    'webpack-dev-server/client?http://localhost:3000',
+    'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server'
   ]),
   plugins: config.plugins.concat(new webpack.HotModuleReplacementPlugin()),
-  module: _.extend({}, config.module, {
+  module: assign({}, config.module, {
     loaders: config.module.loaders.concat({
       test: /\.js$/,
       loaders: ['babel', 'react-hot'],
-      include: [new RegExp(path.join(__dirname, 'src'))]
+      include: [path.join(__dirname, 'src')]
     })
   }),
+
   devtool: 'eval'
+
 });
 
 
+const hasCoverage = global.process.argv
+  .reduce((result, arg) => arg.indexOf('coverage') !== -1 || result, false);
+
+
+const karma = assign({}, config, {
+  module: assign({}, config.module, {
+    loaders: config.module.loaders.concat({
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: [path.join(__dirname, 'src'), path.join(__dirname, 'spec')]
+    })
+  }, hasCoverage ? {
+    postLoaders: [{
+      test: /ui\/src\/.*\.js$/,
+      loader: 'istanbul-instrumenter'
+    }]
+  } : {}),
+
+  plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react/addons',
+      TestUtils: 'react/lib/ReactTestUtils'
+    })
+  ],
+
+  cache: true,
+  debug: true,
+
+  devtool: 'eval'
+});
+
 module.exports = production;
 module.exports.development = development;
+module.exports.karma = karma;

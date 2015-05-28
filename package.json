@@ -5,10 +5,20 @@
   "engines": {
     "iojs": "1.8.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nkbt/esnext-quickstart.git"
+  },
+  "author": "Nik Butenko <nik@butenko.me> (http://butenko.me/)",
+  "license": "MIT",
   "scripts": {
     "start": "node --es_staging --harmony_arrow_functions server.js",
     "build": "rm -rf public && cp -pr src/static/ public && webpack",
-    "lint": "eslint ./spec ./src"
+    "lint": "eslint ./spec ./src",
+    "karma": "node --es_staging --harmony_arrow_functions ./node_modules/karma/bin/karma start ./karma.conf.js",
+    "test": "npm run karma -- --single-run --reporters progress",
+    "test:dev": "npm run karma -- --no-single-run --auto-watch --reporters dots",
+    "test:cov": "rm -rf ./coverage && mkdir -p ./coverage && npm run karma -- --single-run --reporters coverage"
   },
   "dependencies": {
     "babel-core": "^5.4.7",
@@ -18,9 +28,17 @@
     "eslint-loader": "^0.11.2",
     "eslint-plugin-react": "^2.3.0",
     "file-loader": "^0.8.4",
+    "jasmine": "^2.3.1",
+    "karma": "^0.12.33",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-coverage": "^0.3.1",
+    "karma-jasmine": "^0.3.5",
+    "karma-nyan-reporter": "0.0.60",
+    "karma-webpack": "^1.5.1",
     "lodash": "^3.9.3",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
+    "react-jasmine-matchers": "^1.0.4",
     "sorted-object": "^1.0.0",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
