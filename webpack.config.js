@@ -98,7 +98,7 @@ const karma = assign({}, config, {
     })
   }, hasCoverage ? {
     postLoaders: [{
-      test: /ui\/src\/.*\.js$/,
+      test: /src\/.*\.js$/,
       loader: 'istanbul-instrumenter'
     }]
   } : {}),
