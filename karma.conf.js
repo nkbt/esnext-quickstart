@@ -1,5 +1,47 @@
 'use strict';
 
+var path = require('path');
+var webpack = require('webpack');
+
+var webpackConfig = {
+  devtool: 'eval',
+
+  resolve: {
+    extensions: ['', '.js']
+  },
+  module: {
+    loaders: [
+      {test: /\.css$/, loader: 'style!css'},
+      {test: /\.json$/, loader: 'json'},
+      {test: /\.(mp4|svg|png|jpg|gif|otf|eot|ttf|woff|woff2)$/, loader: 'url'},
+      {
+        test: /\.js$/,
+        loaders: ['babel'],
+        include: [path.join(__dirname, 'src'), path.join(__dirname, 'spec')]
+      }
+    ]
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react/addons',
+      TestUtils: 'react/lib/ReactTestUtils'
+    })
+  ],
+  stats: {
+    colors: true
+  }
+};
+
+var hasCoverage = global.process.argv.reduce(function (result, arg) {
+  return arg.indexOf('coverage') !== -1 || result;
+}, false);
+if (hasCoverage) {
+  webpackConfig.module.postLoaders = [{
+    test: /src\/.*\.js$/,
+    loader: 'istanbul-instrumenter'
+  }];
+}
+
 
 module.exports = function (config) {
   config.set({
@@ -9,9 +51,11 @@ module.exports = function (config) {
       'node_modules/react-jasmine-matchers/lib/index.js',
       'spec/index.js'
     ],
-    webpack: require('./webpack.config').karma,
-    exclude: [
-    ],
+    webpack: webpackConfig,
+    webpackMiddleware: {
+      quiet: true
+    },
+    exclude: [],
     preprocessors: {
       'node_modules/react-jasmine-matchers/lib/index.js': ['webpack'],
       'spec/**/*.js': ['webpack'],

@@ -15,8 +15,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "rm -rf public && cp -pr src/static/ public && webpack",
-    "lint": "eslint ./spec ./src",
-    "test": "node ./node_modules/karma/bin/karma start ./karma.conf.js --single-run --reporters nyan,coverage",
+    "lint": "eslint ./spec ./src ./*.js",
+    "test": "npm run lint && node ./node_modules/karma/bin/karma start ./karma.conf.js --single-run --reporters nyan,coverage",
     "test:dev": "node ./node_modules/karma/bin/karma start ./karma.conf.js --no-single-run --auto-watch --reporters dots",
     "test:cov": "rm -rf ./coverage && mkdir -p ./coverage && node ./node_modules/karma/bin/karma start ./karma.conf.js --single-run --reporters coverage"
   },
