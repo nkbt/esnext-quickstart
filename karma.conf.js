@@ -48,7 +48,6 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'node_modules/react-jasmine-matchers/lib/index.js',
       'spec/index.js'
     ],
     webpack: webpackConfig,
@@ -57,7 +56,6 @@ module.exports = function (config) {
     },
     exclude: [],
     preprocessors: {
-      'node_modules/react-jasmine-matchers/lib/index.js': ['webpack'],
       'spec/**/*.js': ['webpack'],
       'src/**/*.js': ['coverage']
     },
