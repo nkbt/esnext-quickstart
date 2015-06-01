@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "ESNext quickstart",
   "engines": {
-    "iojs": "1.8.1"
+    "iojs": ">=1.0",
+    "node": ">=0.10"
   },
   "repository": {
     "type": "git",
@@ -12,13 +13,12 @@
   "author": "Nik Butenko <nik@butenko.me> (http://butenko.me/)",
   "license": "MIT",
   "scripts": {
-    "start": "node --es_staging --harmony_arrow_functions server.js",
+    "start": "node server.js",
     "build": "rm -rf public && cp -pr src/static/ public && webpack",
     "lint": "eslint ./spec ./src",
-    "karma": "node --es_staging --harmony_arrow_functions ./node_modules/karma/bin/karma start ./karma.conf.js",
-    "test": "npm run karma -- --single-run --reporters progress",
-    "test:dev": "npm run karma -- --no-single-run --auto-watch --reporters dots",
-    "test:cov": "rm -rf ./coverage && mkdir -p ./coverage && npm run karma -- --single-run --reporters coverage"
+    "test": "node ./node_modules/karma/bin/karma start ./karma.conf.js --single-run --reporters nyan,coverage",
+    "test:dev": "node ./node_modules/karma/bin/karma start ./karma.conf.js --no-single-run --auto-watch --reporters dots",
+    "test:cov": "rm -rf ./coverage && mkdir -p ./coverage && node ./node_modules/karma/bin/karma start ./karma.conf.js --single-run --reporters coverage"
   },
   "dependencies": {
     "babel-core": "^5.4.7",
