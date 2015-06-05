@@ -90,7 +90,7 @@ var development = {
   module: {
     loaders: [].concat(
       assetsLoaders,
-      {test: /\.js$/, loaders: ['babel', 'react-hot'], include: [path.join(__dirname, 'src')]}
+      {test: /\.js$/, loaders: ['react-hot', 'babel'], include: [path.join(__dirname, 'src')]}
     ),
     preLoaders: [].concat(eslintLoader)
   },
