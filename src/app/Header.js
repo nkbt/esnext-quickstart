@@ -1,11 +1,10 @@
 'use strict';
 
 
-const React = require('react');
+import React from 'react';
 
 
-const Header = React.createClass({
-
+export default class Header extends React.Component {
   render() {
     return (
       <header>
@@ -13,7 +12,4 @@ const Header = React.createClass({
       </header>
     );
   }
-
-});
-
-module.exports = Header;
+}
