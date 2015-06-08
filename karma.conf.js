@@ -16,7 +16,10 @@ var webpackConfig = {
       {test: /\.(mp4|svg|png|jpg|gif|otf|eot|ttf|woff|woff2)$/, loader: 'url'},
       {
         test: /\.js$/,
-        loaders: ['babel?auxiliaryComment=istanbul ignore next'],
+        loader: 'babel',
+        query: {
+          auxiliaryComment: 'istanbul ignore next'
+        },
         include: [path.join(__dirname, 'src'), path.join(__dirname, 'spec')]
       }
     ]
