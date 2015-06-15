@@ -18,7 +18,7 @@ var webpackConfig = {
         test: /\.js$/,
         loader: 'babel',
         query: {
-          auxiliaryComment: 'istanbul ignore next'
+          auxiliaryCommentBefore: 'istanbul ignore next'
         },
         include: [path.join(__dirname, 'src'), path.join(__dirname, 'spec')]
       }
@@ -59,7 +59,7 @@ module.exports = function (config) {
     },
     exclude: [],
     preprocessors: {
-      'spec/**/*.js': ['webpack'],
+      'spec/index.js': ['webpack'],
       'src/**/*.js': ['coverage']
     },
     reporters: ['progress', 'coverage'],
