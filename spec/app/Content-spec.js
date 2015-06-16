@@ -1,7 +1,7 @@
 'use strict';
 
 
-const Content = require('../../src/app/Content');
+import Content from '../../src/app/Content';
 
 
 describe('Content', () => {

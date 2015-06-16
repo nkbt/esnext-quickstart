@@ -1,10 +1,7 @@
-'use strict';
-
-const React = require('react');
+import React from 'react';
 
 
-const Content = React.createClass({
-
+export default class Content extends React.Component {
   render() {
     return (
       <section>
@@ -12,8 +9,4 @@ const Content = React.createClass({
       </section>
     );
   }
-
-});
-
-
-module.exports = Content;
+}

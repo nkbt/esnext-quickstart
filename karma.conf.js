@@ -4,24 +4,28 @@ var path = require('path');
 var webpack = require('webpack');
 
 var webpackConfig = {
-  devtool: 'eval',
+  devtool: 'inline-source-map',
 
   resolve: {
     extensions: ['', '.js']
   },
   module: {
-    loaders: [
-      {test: /\.css$/, loader: 'style!css'},
-      {test: /\.json$/, loader: 'json'},
-      {test: /\.(mp4|svg|png|jpg|gif|otf|eot|ttf|woff|woff2)$/, loader: 'url'},
+    preLoaders: [
       {
         test: /\.js$/,
         loader: 'babel',
-        query: {
-          auxiliaryCommentBefore: 'istanbul ignore next'
-        },
-        include: [path.join(__dirname, 'src'), path.join(__dirname, 'spec')]
+        include: path.join(__dirname, 'spec')
+      },
+      {
+        test: /\.js$/,
+        loader: 'isparta',
+        include: path.join(__dirname, 'src')
       }
+    ],
+    loaders: [
+      {test: /\.css$/, loader: 'style!css'},
+      {test: /\.json$/, loader: 'json'},
+      {test: /\.(mp4|svg|png|jpg|gif|otf|eot|ttf|woff|woff2)$/, loader: 'url'}
     ]
   },
   plugins: [
@@ -35,23 +39,13 @@ var webpackConfig = {
   }
 };
 
-var hasCoverage = global.process.argv.reduce(function (result, arg) {
-  return arg.indexOf('coverage') !== -1 || result;
-}, false);
-if (hasCoverage) {
-  webpackConfig.module.postLoaders = [{
-    test: /src\/.*\.js$/,
-    loader: 'istanbul-instrumenter'
-  }];
-}
-
 
 module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'spec/index.js'
+      'spec/webpack.tests.js'
     ],
     webpack: webpackConfig,
     webpackMiddleware: {
@@ -59,10 +53,9 @@ module.exports = function (config) {
     },
     exclude: [],
     preprocessors: {
-      'spec/index.js': ['webpack'],
-      'src/**/*.js': ['coverage']
+      'spec/webpack.tests.js': ['webpack']
     },
-    reporters: ['progress', 'coverage'],
+    reporters: ['nyan'],
     junitReporter: {
       outputFile: '../reports/js/tests/karma.xml',
       suite: ''

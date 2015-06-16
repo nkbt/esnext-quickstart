@@ -1,10 +1,7 @@
-'use strict';
-
-const React = require('react');
+import React from 'react';
 
 
-const Footer = React.createClass({
-
+export default class Footer extends React.Component {
   render() {
     return (
       <footer>
@@ -12,7 +9,4 @@ const Footer = React.createClass({
       </footer>
     );
   }
-
-});
-
-module.exports = Footer;
+}

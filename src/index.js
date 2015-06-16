@@ -1,15 +1,10 @@
-'use strict';
+import 'babel-core/polyfill';
+import './utils/reset.css';
+import './utils/base.css';
 
 
-require('babel-core/polyfill');
-require('./utils/reset.css');
-require('./utils/base.css');
-
-
-const React = require('react');
-
-
-const App = require('./app/App');
+import React from 'react';
+import App from './app/App';
 
 
 React.render(<App />, document.querySelector('#app'));
