@@ -30,3 +30,7 @@ npm test
 npm run test:cov
 ```
 Open [./coverage/index.html](./coverage/index.html)
+
+
+## Slides
+[http://nkbt.github.io/brave-new-world](http://nkbt.github.io/brave-new-world)
