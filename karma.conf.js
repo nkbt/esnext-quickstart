@@ -1,39 +1,38 @@
 'use strict';
 
+
 var path = require('path');
-var webpack = require('webpack');
+
+const loaders = [
+  {test: /\.css$/, loader: 'null'},
+  {test: /\.mp4$/, loader: 'null'},
+  {test: /\.svg$/, loader: 'null'},
+  {test: /\.png$/, loader: 'null'},
+  {test: /\.jpg$/, loader: 'null'},
+  {test: /\.gif$/, loader: 'null'},
+  {test: /\.(otf|eot|ttf|woff|woff2)/, loader: 'null'},
+
+  // Loader for JSON, used in some tests
+  {test: /\.json$/, loader: 'json'}
+];
 
 var webpackConfig = {
-  devtool: 'inline-source-map',
-
+  devtool: 'eval',
   resolve: {
     extensions: ['', '.js']
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        include: path.join(__dirname, 'spec')
-      },
-      {
-        test: /\.js$/,
-        loader: 'isparta',
-        include: path.join(__dirname, 'src')
-      }
-    ],
-    loaders: [
-      {test: /\.css$/, loader: 'style!css'},
-      {test: /\.json$/, loader: 'json'},
-      {test: /\.(mp4|svg|png|jpg|gif|otf|eot|ttf|woff|woff2)$/, loader: 'url'}
-    ]
+    loaders: loaders.concat(process.env.COVERAGE ?
+      [
+        {test: /\.js$/, loader: 'babel', include: [path.resolve('./test')]},
+        {test: /\.js$/, loader: 'isparta', include: [path.resolve('./src')]}
+      ] :
+      [
+        {
+          test: /\.js$/, loader: 'babel', include: [path.resolve('./src'), path.resolve('./test')]
+        }
+      ])
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      React: 'react/addons',
-      TestUtils: 'react/lib/ReactTestUtils'
-    })
-  ],
   stats: {
     colors: true
   }
@@ -45,31 +44,29 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'spec/webpack.tests.js'
+      'node_modules/babel-core/browser-polyfill.js',
+      'test/index.js'
     ],
     webpack: webpackConfig,
     webpackMiddleware: {
-      quiet: true
+      stats: {
+        chunkModules: false,
+        colors: true
+      }
     },
     exclude: [],
     preprocessors: {
-      'spec/webpack.tests.js': ['webpack']
+      'test/index.js': ['webpack']
     },
-    reporters: ['nyan'],
-    junitReporter: {
-      outputFile: '../reports/js/tests/karma.xml',
-      suite: ''
-    },
+    reporters: ['progress'],
     coverageReporter: {
       dir: './coverage/',
-      subdir: function (browser) {
-        return browser.toLowerCase().split(/[ /-]/)[0];
-      },
+      subdir: '.',
       reporters: [
-        {type: 'cobertura', file: 'cobertura.xml'},
+        {type: 'html'},
+        {type: 'lcovonly'},
         {type: 'text', file: 'text.txt'},
-        {type: 'text-summary', file: 'text-summary.txt'},
-        {type: 'html'}
+        {type: 'text-summary', file: 'text-summary.txt'}
       ]
     },
     captureTimeout: 90000,
@@ -78,7 +75,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: true
   });
 };

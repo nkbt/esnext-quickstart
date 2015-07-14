@@ -1,18 +1,10 @@
-'use strict';
-
-
-var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
+var env = process.env.NODE_ENV || 'production';
+
+
 var embedFileSize = 65536;
-
-
-var output = {
-  path: path.join(__dirname, 'public', 'assets'),
-  filename: 'bundle.js',
-  publicPath: '/assets/'
-};
-
-
 var assetsLoaders = [
   {test: /\.css$/, loader: 'style!css?sourceMap'},
   {test: /\.json$/, loader: 'json'},
@@ -28,47 +20,26 @@ var assetsLoaders = [
 ];
 
 
-var eslintLoader = {
-  test: /\.js$/,
-  loaders: ['eslint'],
-  include: [new RegExp(path.join(__dirname, 'src'))]
-};
-
-
 var production = {
-  devtool: 'eval',
-
-  entry: [
-    './src/index'
-  ],
-  output: output,
-
+  devtool: 'source-map',
+  entry: ['./src/index.js'],
+  output: {filename: 'bundle.js', path: path.resolve('example')},
   plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.NoErrorsPlugin()
+    new HtmlWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"' + env + '"'
+      }
+    })
   ],
 
   module: {
-    loaders: [].concat(
-      assetsLoaders,
-      {test: /\.js$/, loaders: ['babel'], include: [path.join(__dirname, 'src')]}
-    ),
-    preLoaders: [].concat(eslintLoader)
+    loaders: assetsLoaders.concat([
+      {test: /\.js$/, loader: 'babel', include: [path.resolve('src')]}
+    ])
   },
-
-  resolve: {
-    extensions: ['', '.js']
-  },
-
-  stats: {
-    colors: true
-  },
-
-  eslint: {
-    configFile: 'src/.eslintrc',
-    // Treat all warnings as errors too
-    emitError: true
-  }
+  resolve: {extensions: ['', '.js']},
+  stats: {colors: true}
 };
 
 
@@ -76,38 +47,39 @@ var development = {
   devtool: 'eval',
 
   entry: [
-    './src/index',
-    'webpack-dev-server/client?http://0.0.0.0:3000',
+    './src/index.js',
+    'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server'
   ],
-  output: output,
-
+  output: {filename: 'bundle.js', path: path.resolve('example')},
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    new HtmlWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"' + env + '"'
+      }
+    }),
     new webpack.HotModuleReplacementPlugin()
   ],
-
   module: {
-    loaders: [].concat(
-      assetsLoaders,
-      {test: /\.js$/, loaders: ['react-hot', 'babel'], include: [path.join(__dirname, 'src')]}
-    ),
-    preLoaders: [].concat(eslintLoader)
+    loaders: assetsLoaders.concat([
+      {test: /\.js$/, loaders: ['react-hot', 'babel'], include: [path.resolve('src')]}
+    ]),
+    preLoaders: [
+      {test: /\.js$/, loaders: ['eslint'], include: [path.resolve('src')]}
+    ]
   },
-
-  resolve: {
-    extensions: ['', '.js']
+  resolve: {extensions: ['', '.js']},
+  stats: {colors: true},
+  devServer: {
+    stats: {
+      // Do not show list of hundreds of files included in a bundle
+      chunkModules: false,
+      colors: true
+    }
   },
-
-  stats: {
-    colors: true
-  },
-
-  eslint: {
-    configFile: 'src/.eslintrc'
-  }
+  eslint: {configFile: 'src/.eslintrc'}
 };
 
 
-module.exports = production;
-module.exports.development = development;
+module.exports = env === 'production' ? production : development;
