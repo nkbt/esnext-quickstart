@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 var env = process.env.NODE_ENV || 'production';
 
@@ -19,13 +18,17 @@ var assetsLoaders = [
   }
 ];
 
+var output = {
+  path: path.resolve('example', 'assets'),
+  filename: 'bundle.js',
+  publicPath: '/assets/'
+};
 
 var production = {
   devtool: 'source-map',
   entry: ['./src/index.js'],
-  output: {filename: 'bundle.js', path: path.resolve('example')},
+  output: output,
   plugins: [
-    new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"' + env + '"'
@@ -51,9 +54,8 @@ var development = {
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server'
   ],
-  output: {filename: 'bundle.js', path: path.resolve('example')},
+  output: output,
   plugins: [
-    new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"' + env + '"'
