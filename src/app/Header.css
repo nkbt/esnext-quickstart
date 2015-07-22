@@ -1,0 +1,12 @@
+.header {
+  background-color: #06c;
+  padding: 0 1rem;
+  height: 2rem;
+  color: #fff;
+  line-height: 2rem;
+}
+
+.logo {
+  color: #fff;
+  text-decoration: none;
+}

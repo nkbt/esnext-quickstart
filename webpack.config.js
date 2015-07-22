@@ -6,7 +6,10 @@ var env = process.env.NODE_ENV || 'production';
 
 var embedFileSize = 65536;
 var assetsLoaders = [
-  {test: /\.css$/, loader: 'style!css?sourceMap'},
+  {
+    test: /\.css$/,
+    loader: 'style!css?modules&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]'
+  },
   {test: /\.json$/, loader: 'json'},
   {test: /\.mp4$/, loader: 'url?limit=' + embedFileSize + '&mimetype=video/mp4'},
   {test: /\.svg$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/svg+xml'},
@@ -19,9 +22,15 @@ var assetsLoaders = [
   }
 ];
 
+var entry = [
+  './src/reset.css',
+  './src/normalize.css',
+  './src/index.js'
+];
+
 var production = {
   devtool: 'source-map',
-  entry: ['./src/index.js'],
+  entry: entry,
   output: {filename: 'bundle.js', path: path.resolve('example')},
   plugins: [
     new HtmlWebpackPlugin(),
@@ -45,11 +54,10 @@ var production = {
 var development = {
   devtool: 'eval',
 
-  entry: [
-    './src/index.js',
+  entry: entry.concat([
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server'
-  ],
+  ]),
   output: {filename: 'bundle.js', path: path.resolve('./example')},
   plugins: [
     new HtmlWebpackPlugin(),
