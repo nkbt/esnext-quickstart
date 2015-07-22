@@ -2,6 +2,12 @@
 
 [![Dependency Status](https://david-dm.org/nkbt/esnext-quickstart.svg)](https://david-dm.org/nkbt/esnext-quickstart)
 
+## SydJS talk
+[![SydJS July 2015 - Brave new World by Nik Butenko](http://img.youtube.com/vi/_PkjjCrNgHM/0.jpg)](http://www.youtube.com/watch?v=_PkjjCrNgHM "SydJS July 2015 - Brave new World by Nik Butenko")
+
+## Slides
+[http://nkbt.github.io/brave-new-world](http://nkbt.github.io/brave-new-world)
+
 
 ## Run
 ```sh
@@ -32,5 +38,5 @@ npm run test:cov
 Open [./coverage/index.html](./coverage/index.html)
 
 
-## Slides
-[http://nkbt.github.io/brave-new-world](http://nkbt.github.io/brave-new-world)
+## Demo
+[http://nkbt.github.io/esnext-quickstart](http://nkbt.github.io/esnext-quickstart)
