@@ -39,4 +39,4 @@ Open [./coverage/index.html](./coverage/index.html)
 
 
 ## Demo
-[http://nkbt.github.io/esnext-quickstart](http://nkbt.github.io/esnext-quickstart)
+[http://nkbt.github.io/esnext-quickstart/example](http://nkbt.github.io/esnext-quickstart/example)
