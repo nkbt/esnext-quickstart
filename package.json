@@ -16,7 +16,7 @@
     "build": "npm run build:clean && npm run build:example",
     "build:clean": "rm -rf example",
     "build:example": "webpack",
-    "start": "NODE_ENV=development node server",
+    "start": "NODE_ENV=development webpack-dev-server",
     "lint": "eslint .",
     "karma": "karma start ./karma.conf.js",
     "test": "npm run karma --  --single-run --reporters nyan",

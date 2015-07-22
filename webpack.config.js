@@ -19,16 +19,10 @@ var assetsLoaders = [
   }
 ];
 
-var output = {
-  path: path.resolve('example', 'assets'),
-  filename: 'bundle.js',
-  publicPath: '/assets/'
-};
-
 var production = {
   devtool: 'source-map',
   entry: ['./src/index.js'],
-  output: output,
+  output: {filename: 'bundle.js', path: path.resolve('example')},
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
@@ -39,9 +33,9 @@ var production = {
   ],
 
   module: {
-    loaders: [
+    loaders: assetsLoaders.concat([
       {test: /\.js$/, loader: 'babel', include: [path.resolve('src')]}
-    ]
+    ])
   },
   resolve: {extensions: ['', '.js']},
   stats: {colors: true}
@@ -56,7 +50,7 @@ var development = {
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server'
   ],
-  output: output,
+  output: {filename: 'bundle.js', path: path.resolve('./example')},
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
@@ -67,9 +61,9 @@ var development = {
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
-    loaders: [
+    loaders: assetsLoaders.concat([
       {test: /\.js$/, loaders: ['react-hot', 'babel'], include: [path.resolve('src')]}
-    ],
+    ]),
     preLoaders: [
       {test: /\.js$/, loaders: ['eslint'], include: [path.resolve('src')]}
     ]
