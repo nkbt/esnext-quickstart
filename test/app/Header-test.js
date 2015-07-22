@@ -1,13 +1,17 @@
 import Header from '../../src/app/Header';
-import React from 'react/addons';
+import createComponent from '../utils/createComponent';
 
 
 describe('Header', () => {
-  it('Should render logo', () => {
-    const header = React.addons.TestUtils.renderIntoDocument(<Header />);
-    const a = React.addons.TestUtils.findRenderedDOMComponentWithTag(header, 'a');
+  it('Should render greetings', () => {
+    const header = createComponent(Header).out;
+    const a = header.props.children;
 
-    expect(a).toBeDom();
-    expect(a).toHaveText('Logo');
+    expect(header).toBeEl();
+    expect(header.type).toEqual('header');
+
+    expect(a).toBeEl();
+    expect(a.type).toEqual('a');
+    expect(a.props.children).toMatch('Logo');
   });
 });
