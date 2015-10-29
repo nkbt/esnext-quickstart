@@ -12,16 +12,16 @@
   "author": "Nik Butenko <nik@butenko.me> (http://butenko.me/)",
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:clean && npm run build:example",
+    "build": "npm run build:clean -s && npm run build:example -s",
     "build:clean": "rm -rf example",
     "build:example": "webpack",
     "start": "NODE_ENV=development webpack-dev-server",
     "lint": "eslint .",
     "karma": "karma start ./karma.conf.js",
-    "test": "npm run karma --  --single-run --reporters nyan",
-    "test:dev": "npm run karma -- --no-single-run --auto-watch --reporters nyan",
-    "test:cov": "COVERAGE=1 npm run karma -- --single-run --reporters coverage",
-    "check": "npm run lint && npm run test && npm run build"
+    "test": "npm run karma -s --  --single-run --reporters nyan",
+    "test:dev": "npm run karma -s -- --no-single-run --auto-watch --reporters nyan",
+    "test:cov": "COVERAGE=1 npm run karma -s -- --single-run --reporters coverage",
+    "check": "npm run lint -s && npm run test -s && npm run build -s"
   },
   "dependencies": {
     "babel-core": "^5.8.33",
