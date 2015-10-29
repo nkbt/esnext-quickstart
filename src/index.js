@@ -1,4 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import App from './app/App';
 
-React.render(<App />, document.body);
+const appRoot = document.createElement('div');
+
+appRoot.id = 'app';
+document.body.appendChild(appRoot);
+ReactDOM.render(<App />, appRoot);
