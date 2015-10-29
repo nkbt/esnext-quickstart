@@ -3,7 +3,7 @@
 
 var path = require('path');
 
-const loaders = [
+var loaders = [
   {test: /\.css$/, loader: 'null'},
   {test: /\.mp4$/, loader: 'null'},
   {test: /\.svg$/, loader: 'null'},
