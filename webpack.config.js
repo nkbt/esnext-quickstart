@@ -91,4 +91,8 @@ var development = {
 };
 
 
+// For compatibility with Node 0.10
+require('babel-core/polyfill');
+
+
 module.exports = env === 'production' ? production : development;
