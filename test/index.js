@@ -7,6 +7,4 @@ const testsContext = require.context('.', true, /\-test\.js$/);
 testsContext.keys().forEach(testsContext);
 
 
-beforeEach(function () {
-  jasmine.addMatchers(matchers(TestUtils));
-});
+beforeEach(() => jasmine.addMatchers(matchers(TestUtils)));
