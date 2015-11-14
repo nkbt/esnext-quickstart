@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: v0.10.40
+
+
+dependencies:
+  pre:
+    - npm install -g npm@3
+
+test:
+  override:
+    - cat ${CIRCLE_ARTIFACTS}/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+    - ./node_modules/.bin/eslint --debug . --format tap | ./node_modules/.bin/tap-xunit > ${CIRCLE_TEST_REPORTS}/lint.xml; test ${PIPESTATUS[0]} -eq 0
+    - COVERAGE=1 karma start ./karma.conf.js --single-run --reporters coverage,junit
+    - REPORT_DIR=${CIRCLE_TEST_REPORTS} LOG_DIR=${CIRCLE_ARTIFACTS} npm run test:e2e -s
