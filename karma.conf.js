@@ -20,6 +20,12 @@ var loaders = [
 
 var withCoverage = process.argv.indexOf('coverage') !== -1 || process.env.COVERAGE;
 
+var babelLoader = 'babel?' +
+  JSON.stringify({
+    presets: ['es2015', 'react'],
+    plugins: ['transform-es2015-modules-commonjs', 'transform-object-rest-spread']
+  });
+
 var webpackConfig = {
   devtool: 'eval',
   resolve: {
@@ -28,12 +34,12 @@ var webpackConfig = {
   module: {
     loaders: loaders.concat(withCoverage ?
       [
-        {test: /\.js$/, loader: 'babel', include: [path.resolve('test')]},
+        {test: /\.js$/, loader: babelLoader, include: [path.resolve('test')]},
         {test: /\.js$/, loader: 'isparta', include: [path.resolve('src')]}
       ] :
       [
         {
-          test: /\.js$/, loader: 'babel', include: [path.resolve('src'), path.resolve('test')]
+          test: /\.js$/, loader: babelLoader, include: [path.resolve('src'), path.resolve('test')]
         }
       ])
   },
@@ -58,7 +64,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'node_modules/babel-core/browser-polyfill.js',
+      'node_modules/babel-polyfill/browser.js',
       'test/index.js'
     ],
     webpack: webpackConfig,

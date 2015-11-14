@@ -35,6 +35,10 @@ var entry = [
 ];
 
 
+// For compatibility with Node 0.10
+require('babel-polyfill');
+
+
 module.exports = {
   devtool: 'source-map',
   entry: entry,
