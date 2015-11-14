@@ -2,6 +2,8 @@
 
 
 var path = require('path');
+var rimraf = require('rimraf');
+var mkdirp = require('mkdirp');
 
 var loaders = [
   {test: /\.css$/, loader: 'null'},
@@ -16,20 +18,28 @@ var loaders = [
   {test: /\.json$/, loader: 'json'}
 ];
 
+var withCoverage = process.argv.indexOf('coverage') !== -1 || process.env.COVERAGE;
+
+var babelLoader = 'babel?' +
+  JSON.stringify({
+    presets: ['es2015', 'react'],
+    plugins: ['transform-es2015-modules-commonjs', 'transform-object-rest-spread']
+  });
+
 var webpackConfig = {
   devtool: 'eval',
   resolve: {
     extensions: ['', '.js']
   },
   module: {
-    loaders: loaders.concat(process.env.COVERAGE ?
+    loaders: loaders.concat(withCoverage ?
       [
-        {test: /\.js$/, loader: 'babel', include: [path.resolve('./test')]},
-        {test: /\.js$/, loader: 'isparta', include: [path.resolve('./src')]}
+        {test: /\.js$/, loader: babelLoader, include: [path.resolve('test')]},
+        {test: /\.js$/, loader: 'isparta', include: [path.resolve('src')]}
       ] :
       [
         {
-          test: /\.js$/, loader: 'babel', include: [path.resolve('./src'), path.resolve('./test')]
+          test: /\.js$/, loader: babelLoader, include: [path.resolve('src'), path.resolve('test')]
         }
       ])
   },
@@ -38,13 +48,23 @@ var webpackConfig = {
   }
 };
 
+var coverageDir = path.resolve(
+  path.join(process.env.CIRCLE_ARTIFACTS || 'reports', 'coverage')
+);
+
+
+if (withCoverage) {
+  rimraf.sync(coverageDir);
+  mkdirp.sync(coverageDir);
+}
+
 
 module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'node_modules/babel-core/browser-polyfill.js',
+      'node_modules/babel-polyfill/browser.js',
       'test/index.js'
     ],
     webpack: webpackConfig,
@@ -59,13 +79,17 @@ module.exports = function (config) {
       'test/index.js': ['webpack']
     },
     reporters: ['progress'],
+    junitReporter: {
+      outputDir: path.resolve(process.env.CIRCLE_TEST_REPORTS || 'reports'),
+      suite: ''
+    },
     coverageReporter: {
-      dir: './coverage/',
+      dir: coverageDir,
       subdir: '.',
       reporters: [
         {type: 'html'},
         {type: 'lcovonly'},
-        {type: 'text', file: 'text.txt'},
+        {type: 'text'},
         {type: 'text-summary', file: 'text-summary.txt'}
       ]
     },

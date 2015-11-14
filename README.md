@@ -1,6 +1,11 @@
 # esnext-quickstart
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nkbt/help)
+
+[![Circle CI](https://circleci.com/gh/nkbt/esnext-quickstart.svg?style=svg)](https://circleci.com/gh/nkbt/esnext-quickstart)
 [![Dependency Status](https://david-dm.org/nkbt/esnext-quickstart.svg)](https://david-dm.org/nkbt/esnext-quickstart)
+[![devDependency Status](https://david-dm.org/nkbt/esnext-quickstart/dev-status.svg)](https://david-dm.org/nkbt/esnext-quickstart#info=devDependencies)
+
 
 ## SydJS talk
 [![SydJS July 2015 - Brave new World by Nik Butenko](http://img.youtube.com/vi/_PkjjCrNgHM/0.jpg)](http://www.youtube.com/watch?v=_PkjjCrNgHM "SydJS July 2015 - Brave new World by Nik Butenko")
@@ -31,11 +36,18 @@ npm test
 ```
 
 
+## Run End-to-End tests
+```sh
+npm run test:e2e
+```
+
+
 ## Generate test coverage report
 ```sh
 npm run test:cov
+
+open ./reports/coverage/index.html
 ```
-Open [./coverage/index.html](./coverage/index.html)
 
 
 ## Demo

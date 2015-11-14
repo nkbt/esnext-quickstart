@@ -40,23 +40,40 @@ require('babel-polyfill');
 
 
 module.exports = {
-  devtool: 'source-map',
-  entry: entry,
+  devtool: 'eval',
+
+  entry: entry.concat([
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server'
+  ]),
   output: {filename: 'bundle.js', path: path.resolve('example')},
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: '"development"'
       }
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
-
   module: {
     loaders: assetsLoaders.concat([
-      {test: /\.js$/, loader: babelLoader, include: [path.resolve('src')]}
-    ])
+      {test: /\.js$/, loaders: ['react-hot', babelLoader], include: [path.resolve('src')]}
+    ]),
+    preLoaders: [
+      {test: /\.js$/, loaders: ['eslint'], include: [path.resolve('src')]}
+    ]
   },
   resolve: {extensions: ['', '.js']},
-  stats: {colors: true}
+  stats: {colors: true},
+  eslint: {configFile: 'src/.eslintrc'},
+  devServer: {
+    hot: true,
+    historyApiFallback: true,
+    stats: {
+      // Do not show list of hundreds of files included in a bundle
+      chunkModules: false,
+      colors: true
+    }
+  }
 };
