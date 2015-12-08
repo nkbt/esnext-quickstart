@@ -60,7 +60,7 @@
     "karma-webpack": "^1.7.0",
     "lodash": "^3.10.1",
     "mkdirp": "^0.5.1",
-    "nightwatch": "^0.8.6",
+    "nightwatch": "^0.8.9",
     "nightwatch-autorun": "^1.0.0",
     "null-loader": "^0.1.1",
     "phantomjs": "^1.9.18",
