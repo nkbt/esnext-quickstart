@@ -33,7 +33,7 @@
     "react-dom": "^0.14.2"
   },
   "devDependencies": {
-    "babel-core": "^6.1.21",
+    "babel-core": "^6.3.17",
     "babel-eslint": "^4.1.5",
     "babel-loader": "^6.1.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.1.20",
