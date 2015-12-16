@@ -1,11 +1,14 @@
 'use strict';
 
 
-var path = require('path');
-var rimraf = require('rimraf');
-var mkdirp = require('mkdirp');
+process.env.NODE_ENV = 'test';
 
-var loaders = [
+
+const path = require('path');
+const rimraf = require('rimraf');
+const mkdirp = require('mkdirp');
+
+const loaders = [
   {test: /\.css$/, loader: 'null'},
   {test: /\.mp4$/, loader: 'null'},
   {test: /\.svg$/, loader: 'null'},
@@ -18,15 +21,9 @@ var loaders = [
   {test: /\.json$/, loader: 'json'}
 ];
 
-var withCoverage = process.argv.indexOf('coverage') !== -1 || process.env.COVERAGE;
+const withCoverage = process.argv.indexOf('coverage') !== -1 || process.env.COVERAGE;
 
-var babelLoader = 'babel?' +
-  JSON.stringify({
-    presets: ['es2015', 'react'],
-    plugins: ['transform-es2015-modules-commonjs', 'transform-object-rest-spread']
-  });
-
-var webpackConfig = {
+const webpackConfig = {
   devtool: 'eval',
   resolve: {
     extensions: ['', '.js']
@@ -34,12 +31,12 @@ var webpackConfig = {
   module: {
     loaders: loaders.concat(withCoverage ?
       [
-        {test: /\.js$/, loader: babelLoader, include: [path.resolve('test')]},
+        {test: /\.js$/, loader: 'babel', include: [path.resolve('test')]},
         {test: /\.js$/, loader: 'isparta', include: [path.resolve('src')]}
       ] :
       [
         {
-          test: /\.js$/, loader: babelLoader, include: [path.resolve('src'), path.resolve('test')]
+          test: /\.js$/, loader: 'babel', include: [path.resolve('src'), path.resolve('test')]
         }
       ])
   },
@@ -48,7 +45,7 @@ var webpackConfig = {
   }
 };
 
-var coverageDir = path.resolve(
+const coverageDir = path.resolve(
   path.join(process.env.CIRCLE_ARTIFACTS || 'reports', 'coverage')
 );
 
@@ -59,47 +56,45 @@ if (withCoverage) {
 }
 
 
-module.exports = function (config) {
-  config.set({
-    basePath: '',
-    frameworks: ['jasmine'],
-    files: [
-      'node_modules/babel-polyfill/browser.js',
-      'test/index.js'
-    ],
-    webpack: webpackConfig,
-    webpackMiddleware: {
-      stats: {
-        chunkModules: false,
-        colors: true
-      }
-    },
-    exclude: [],
-    preprocessors: {
-      'test/index.js': ['webpack']
-    },
-    reporters: ['progress'],
-    junitReporter: {
-      outputDir: path.resolve(process.env.CIRCLE_TEST_REPORTS || 'reports'),
-      suite: ''
-    },
-    coverageReporter: {
-      dir: coverageDir,
-      subdir: '.',
-      reporters: [
-        {type: 'html'},
-        {type: 'lcovonly'},
-        {type: 'text'},
-        {type: 'text-summary', file: 'text-summary.txt'}
-      ]
-    },
-    captureTimeout: 90000,
-    browserNoActivityTimeout: 60000,
-    port: 9876,
-    colors: true,
-    logLevel: config.LOG_INFO,
-    autoWatch: false,
-    browsers: ['PhantomJS'],
-    singleRun: true
-  });
-};
+module.exports = config => config.set({
+  basePath: '',
+  frameworks: ['jasmine'],
+  files: [
+    'node_modules/babel-polyfill/browser.js',
+    'test/index.js'
+  ],
+  webpack: webpackConfig,
+  webpackMiddleware: {
+    stats: {
+      chunkModules: false,
+      colors: true
+    }
+  },
+  exclude: [],
+  preprocessors: {
+    'test/index.js': ['webpack']
+  },
+  reporters: ['progress'],
+  junitReporter: {
+    outputDir: path.resolve(process.env.CIRCLE_TEST_REPORTS || 'reports'),
+    suite: ''
+  },
+  coverageReporter: {
+    dir: coverageDir,
+    subdir: '.',
+    reporters: [
+      {type: 'html'},
+      {type: 'lcovonly'},
+      {type: 'text'},
+      {type: 'text-summary', file: 'text-summary.txt'}
+    ]
+  },
+  captureTimeout: 90000,
+  browserNoActivityTimeout: 60000,
+  port: 9876,
+  colors: true,
+  logLevel: config.LOG_INFO,
+  autoWatch: false,
+  browsers: ['PhantomJS'],
+  singleRun: true
+});
