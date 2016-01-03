@@ -69,7 +69,7 @@
     "nightwatch-autorun": "^1.0.1",
     "null-loader": "^0.1.1",
     "phantomjs": "^1.9.19",
-    "react-addons-test-utils": "^0.14.3",
+    "react-addons-test-utils": "^0.14.5",
     "react-jasmine-matchers": "^2.0.0",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
