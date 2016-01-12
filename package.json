@@ -63,7 +63,7 @@
     "karma-nyan-reporter": "0.2.3",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-webpack": "^1.7.0",
-    "lodash": "^3.10.1",
+    "lodash": "^4.0.0",
     "mkdirp": "^0.5.1",
     "nightwatch": "^0.8.10",
     "nightwatch-autorun": "^2.0.0",
