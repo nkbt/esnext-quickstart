@@ -25,17 +25,6 @@
           }
         ]
       ]
-    },
-    "test": {
-      "plugins": [
-        [
-          "babel-plugin-webpack-loaders",
-          {
-            "config": "./webpack.config.js",
-            "verbose": false
-          }
-        ]
-      ]
     }
   }
 }
