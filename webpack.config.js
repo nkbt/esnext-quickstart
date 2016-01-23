@@ -15,14 +15,14 @@ const assetsLoaders = [
     loader: 'style!css?modules&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]'
   },
   {test: /\.json$/, loader: 'json'},
-  {test: /\.mp4$/, loader: 'url?limit=' + embedFileSize + '&mimetype=video/mp4'},
-  {test: /\.svg$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/svg+xml'},
-  {test: /\.png$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/png'},
-  {test: /\.jpg$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/jpeg'},
-  {test: /\.gif$/, loader: 'url?limit=' + embedFileSize + '&mimetype=image/gif'},
+  {test: /\.mp4$/, loader: `url?limit=${embedFileSize}&mimetype=video/mp4`},
+  {test: /\.svg$/, loader: `url?limit=${embedFileSize}&mimetype=image/svg+xml`},
+  {test: /\.png$/, loader: `url?limit=${embedFileSize}&mimetype=image/png`},
+  {test: /\.jpg$/, loader: `url?limit=${embedFileSize}&mimetype=image/jpeg`},
+  {test: /\.gif$/, loader: `url?limit=${embedFileSize}&mimetype=image/gif`},
   {
     test: /\.(otf|eot|ttf|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-    loader: 'url?limit=' + embedFileSize
+    loader: `url?limit=${embedFileSize}`
   }
 ];
 
