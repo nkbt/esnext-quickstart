@@ -67,7 +67,7 @@
     "mkdirp": "^0.5.1",
     "nightwatch-autorun": "^2.0.1",
     "null-loader": "^0.1.1",
-    "phantomjs": "^1.9.19",
+    "phantomjs": "^2.1.2",
     "react-addons-test-utils": "^0.14.6",
     "react-jasmine-matchers": "^2.0.0",
     "react-transform-catch-errors": "^1.0.1",
