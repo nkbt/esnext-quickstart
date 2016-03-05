@@ -1,3 +1,5 @@
+/* eslint no-process-env:0 */
+
 'use strict';
 
 
@@ -23,22 +25,23 @@ const loaders = [
 
 const withCoverage = process.argv.indexOf('coverage') !== -1 || process.env.COVERAGE;
 
+
+const jsLoaders = [
+  {test: /\.js$/, loader: 'babel', include: [path.resolve('src'), path.resolve('test')]}
+];
+const jsLoadersWithCoverage = [
+  {test: /\.js$/, loader: 'babel', include: [path.resolve('test')]},
+  {test: /\.js$/, loader: 'isparta', include: [path.resolve('src')]}
+];
+
+
 const webpackConfig = {
   devtool: 'eval',
   resolve: {
     extensions: ['', '.js']
   },
   module: {
-    loaders: loaders.concat(withCoverage ?
-      [
-        {test: /\.js$/, loader: 'babel', include: [path.resolve('test')]},
-        {test: /\.js$/, loader: 'isparta', include: [path.resolve('src')]}
-      ] :
-      [
-        {
-          test: /\.js$/, loader: 'babel', include: [path.resolve('src'), path.resolve('test')]
-        }
-      ])
+    loaders: loaders.concat(withCoverage ? jsLoadersWithCoverage : jsLoaders)
   },
   stats: {
     colors: true
