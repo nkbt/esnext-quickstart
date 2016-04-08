@@ -35,7 +35,7 @@
   "homepage": "https://github.com/nkbt/esnext-quickstart",
   "dependencies": {
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^15.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.6.5",
