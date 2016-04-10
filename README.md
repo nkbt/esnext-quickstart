@@ -1,10 +1,10 @@
 # esnext-quickstart
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nkbt/help)
+[![Gitter](https://img.shields.io/gitter/room/nkbt/help.svg?style=flat-square)](https://gitter.im/nkbt/help)
 
-[![Circle CI](https://circleci.com/gh/nkbt/esnext-quickstart.svg?style=svg)](https://circleci.com/gh/nkbt/esnext-quickstart)
-[![Dependency Status](https://david-dm.org/nkbt/esnext-quickstart.svg)](https://david-dm.org/nkbt/esnext-quickstart)
-[![devDependency Status](https://david-dm.org/nkbt/esnext-quickstart/dev-status.svg)](https://david-dm.org/nkbt/esnext-quickstart#info=devDependencies)
+[![CircleCI](https://img.shields.io/circleci/project/nkbt/esnext-quickstart.svg?style=flat-square&label=nix-build)](https://circleci.com/gh/nkbt/esnext-quickstart)
+[![Dependencies](https://img.shields.io/david/nkbt/esnext-quickstart.svg?style=flat-square)](https://david-dm.org/nkbt/esnext-quickstart)
+[![Dev Dependencies](https://img.shields.io/david/dev/nkbt/esnext-quickstart.svg?style=flat-square)](https://david-dm.org/nkbt/esnext-quickstart#info=devDependencies)
 
 
 ## SydJS talk

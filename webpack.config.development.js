@@ -1,5 +1,3 @@
-/* eslint no-process-env:0 */
-
 'use strict';
 
 
@@ -36,11 +34,10 @@ const entry = [
 
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: '#cheap-module-eval-source-map',
 
   entry: entry.concat([
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server'
+    'webpack-dev-server/client?http://localhost:8080'
   ]),
   output: {filename: 'bundle.js', path: path.resolve('example')},
   plugins: [
@@ -49,8 +46,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    })
   ],
   module: {
     loaders: assetsLoaders.concat([
