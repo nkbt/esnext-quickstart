@@ -1,5 +1,3 @@
-/* eslint no-process-env:0 */
-
 'use strict';
 
 
@@ -36,7 +34,7 @@ const entry = [
 
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: '#source-map',
   entry,
   output: {filename: 'bundle.js', path: path.resolve('example')},
   plugins: [
