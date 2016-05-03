@@ -59,7 +59,7 @@
     "karma": "0.13.22",
     "karma-coverage": "0.5.5",
     "karma-jasmine": "0.3.8",
-    "karma-junit-reporter": "0.4.2",
+    "karma-junit-reporter": "1.0.0",
     "karma-nyan-reporter": "0.2.4",
     "karma-phantomjs-launcher": "1.0.0",
     "karma-webpack": "1.7.0",
