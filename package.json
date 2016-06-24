@@ -61,7 +61,7 @@
     "karma-jasmine": "1.0.2",
     "karma-junit-reporter": "2.0.0",
     "karma-nyan-reporter": "0.2.4",
-    "karma-phantomjs-launcher": "1.0.0",
+    "karma-phantomjs-launcher": "1.0.1",
     "karma-webpack": "1.7.0",
     "lodash": "4.13.1",
     "mkdirp": "0.5.1",
