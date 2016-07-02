@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/nkbt/esnext-quickstart",
   "dependencies": {
-    "react": "15.1.0",
+    "react": "15.2.0",
     "react-dom": "15.2.0"
   },
   "devDependencies": {
