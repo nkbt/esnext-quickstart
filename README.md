@@ -1,6 +1,6 @@
 # esnext-quickstart
 
-[![Unmaintained](https://img.shields.io/badge/unmaintained-×-blue.svg?style=flat-square)](https://discord.gg/013tGW1IMcW6Vd1o7)
+[![Unmaintained](https://img.shields.io/badge/unmaintained-×-red.svg?style=flat-square)](https://discord.gg/013tGW1IMcW6Vd1o7)
 
 [![Discord](https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square)](https://discord.gg/013tGW1IMcW6Vd1o7)
 
