@@ -1,6 +1,8 @@
 # esnext-quickstart
 
-[![Gitter](https://img.shields.io/gitter/room/nkbt/help.svg?style=flat-square)](https://gitter.im/nkbt/help)
+[![Unmaintained](https://img.shields.io/badge/unmaintained-×-blue.svg?style=flat-square)](https://discord.gg/013tGW1IMcW6Vd1o7)
+
+[![Discord](https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square)](https://discord.gg/013tGW1IMcW6Vd1o7)
 
 [![CircleCI](https://img.shields.io/circleci/project/nkbt/esnext-quickstart.svg?style=flat-square&label=nix-build)](https://circleci.com/gh/nkbt/esnext-quickstart)
 [![Dependencies](https://img.shields.io/david/nkbt/esnext-quickstart.svg?style=flat-square)](https://david-dm.org/nkbt/esnext-quickstart)
